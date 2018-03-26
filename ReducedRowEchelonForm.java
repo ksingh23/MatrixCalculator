@@ -1,4 +1,3 @@
-
 public class ReducedRowEchelonForm {
 	public void rref (double [][] matrix) {
 		    for (int p = 0; p < matrix.length; p++){
