@@ -17,6 +17,7 @@ public class Command {
 			System.out.println ("Press 3 for multiplication");
 			System.out.println("Press 4 for reduced row echelon form");
 			System.out.println ("Press 5 for inverse");
+			System.out.println ("Press 6 for determinant");
 			System.out.println("Press 0 to quit");
 			input = scan.nextInt ();
 			if (input == 1 || input == 2 || input == 3) {
@@ -152,25 +153,48 @@ public class Command {
 								invertMatrix [i][j] = scan.nextDouble();
 							}
 						}
-						for (int i = 0; i < m; i++) {
-							for (int j = 0; j < n; j++) {
-								if (identity[i][j] != invertMatrix[i][j]){
-									continue;
+						
+						if (inverter.determinant(invertMatrix) == 0) {
+							System.out.println("Not invertible: determinant equals 0");
+						}
+						
+						else {
+							System.out.print ("Matrix: \n");
+							for (int i = 0; i < m; i++){
+								for (int j = 0; j < n; j++){
+									System.out.print("\t" + invertMatrix [i][j] + " ");
 								}
+								System.out.print ("\n");
 							}
+							System.out.println ("Inverse:");
+							inverter.inverse(invertMatrix);
 						}
-						System.out.print ("Matrix: \n");
-						for (int i = 0; i < m; i++){
-							for (int j = 0; j < n; j++){
-								System.out.print("\t" + Math.round(invertMatrix [i][j]) + " ");
-							}
-							System.out.print ("\n");
-						}
-						System.out.println ("Inverse:");
-						inverter.inverse(invertMatrix);
 					}	
 				}
 				
+				else if (input == 6) {
+					System.out.println ("Enter the number of rows in the matrix: ");
+					m = scan.nextInt();
+					System.out.println ("Enter the number of columns in the matrix: ");
+					n = scan.nextInt();
+					if (m != n) {
+						System.out.println ("Not a square matrix- try again");
+					}
+					
+					else {
+						invertMatrix = new double [m][n];
+						for (int i = 0; i < m; i++){
+							System.out.println ("Enter row " + (i+1) + " of the matrix");
+							for (int j = 0; j < n; j++){
+								invertMatrix [i][j] = scan.nextDouble();
+							}
+						}
+						
+						Inverse inverter = new Inverse ();
+						System.out.println ("The determinant of this matrix is: " + inverter.determinant(invertMatrix));
+					}
+					
+				}
 				else if (input == 0) {
 					quit = true;
 					scan.close ();
