@@ -1,18 +1,38 @@
+import java.text.DecimalFormat;
 
 public class Inverse {
-	public boolean checkInvertible (double [][] inversionMatrix) {
-		int [][] identity = {{1,0,0},{0,1,0},{0,0,1}};
-		boolean invertible = true;
-		for (int i = 0; i < inversionMatrix.length; i++) {
-			for (int j = 0; j < inversionMatrix.length; j++) {
-				if (inversionMatrix[i][j] != identity[i][j]) {
-					invertible = false;
-					break;
-				}
-			}
-		}
-		
-		return invertible;
+	DecimalFormat f = new DecimalFormat ("##.00");
+	public int determinant (double [][] matrix) {
+		 int determinant = 0; 
+		    if(matrix.length==1) {  
+		      determinant =  (int) matrix[0][0];
+		      return determinant;
+		    }
+		    
+		    else {
+		    	for(int i=0;i<matrix.length;i++){ 
+				      double[][] smaller= new double[matrix.length-1][matrix.length-1]; 
+				      for(int a=1;a<matrix.length;a++) {
+				    	  for(int b=0;b<matrix.length;b++){
+					          if (b < i){
+					            smaller[a-1][b]=matrix[a][b];
+					          }
+					          else if (b > i) {
+					            smaller[a-1][b-1]=matrix[a][b];
+					          }
+					       }
+				      }
+				      if(i % 2 == 0){			//When computing determinant, you must multiply top row by matrix below, and it is positive for even columns, odd for negative ones
+				    	  determinant += matrix[0][i] * (determinant(smaller)); 
+				      }
+				      else{
+				    	  determinant += -1 * matrix[0][i] * (determinant(smaller)); 
+				      }
+				    }
+		    	
+		    	 return determinant; 
+		    }
+		   
 	}
 	
 	public void inverse (double [][] matrix) {
@@ -50,7 +70,7 @@ public class Inverse {
 	    
 		for (int i = 0; i < inverse.length; i++){
 			for (int j = 0; j < inverse.length; j++){
-				System.out.print("\t" + Math.round(inverse[i][j]) + " ");
+				System.out.print("\t" + f.format(inverse[i][j]) + " ");
 			}
 			System.out.print ("\n");
 		}
