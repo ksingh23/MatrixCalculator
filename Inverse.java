@@ -10,15 +10,15 @@ public class Inverse {
 		    }
 		    
 		    else {
-		    	for(int i=0;i<matrix.length;i++){ 
+		    	for(int i = 0; i < matrix.length; i++){ 
 				      double[][] smaller= new double[matrix.length-1][matrix.length-1]; 
-				      for(int a=1;a<matrix.length;a++) {
-				    	  for(int b=0;b<matrix.length;b++){
-					          if (b < i){
-					            smaller[a-1][b]=matrix[a][b];
+				      for(int j = 1; j < matrix.length; j++) {			//The matrix for the recursive call starts one row below the top
+				    	  for(int k = 0; k <matrix.length; k++){			//Iterates across the columns
+					          if (k < i){
+					            smaller[j-1][k]=matrix[j][k];			
 					          }
-					          else if (b > i) {
-					            smaller[a-1][b-1]=matrix[a][b];
+					          else if (k > i) {
+					            smaller[j-1][k-1]=matrix[j][k];
 					          }
 					       }
 				      }
