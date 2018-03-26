@@ -8,6 +8,6 @@ Addition.java: class containing method that adds two matrices
 
 Subtraction.java: class containing method that subtracts two matrices
 
-Inverse.java: class containing method to calculate inverse
+Inverse.java: class containing method to calculate inverse and determinant
 
 ReducedRowEchelonForm.java: class containing method to compute rref of matrix
