@@ -1,4 +1,4 @@
-
+// Hi there!
 public class Multiplication {
 	public void multMatrix (int [][] matrix1, int [][] matrix2){
 		int [][] prod = new int [matrix1.length][matrix2[0].length];		
